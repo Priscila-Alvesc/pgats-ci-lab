@@ -42,6 +42,3 @@
       #Executar os testes e2e
       - name: Executando testes E2E
         run: yarn run e2e
-
-
-      
