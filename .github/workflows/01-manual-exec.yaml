@@ -27,9 +27,7 @@
           with:
             node-version: 22.x
 
-        # instalação do Yarn
-        - name: instalando Yarn
-          run: npm install -g yarn
+        
 
         #instalação das dependências
         - name: Instalando as dependências
