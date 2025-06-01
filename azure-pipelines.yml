@@ -1,21 +1,24 @@
-name: Execução manual azure
+trigger:
+  - main
 
-on:
-  workflow_dispatch:
+pool:
+  vmImage: ubuntu-latest
 
 jobs:
-    e2e-tests:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v4
-        - uses: actions/setup-node@v4
-          with:
-            node-version: 22.x
-        - name: Instalando Yarn
-          run: npm install -g yarn
-        - name: Instalando as dependências
-          run: yarn
-        - name: Instalando Playwright
-          run: yarn playwright install
-        - name: Executando testes E2E
-          run: yarn run e2e
+  - job: e2e_tests
+    displayName: "Testes E2E"
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+      - checkout: self
+      - task: UseNode@1
+        inputs:
+          version: '22.x'
+      - script: npm install -g yarn
+        displayName: "Instalando Yarn"
+      - script: yarn
+        displayName: "Instalando dependências"
+      - script: yarn playwright install
+        displayName: "Instalando Playwright"
+      - script: yarn run e2e
+        displayName: "Executando testes E2E"
