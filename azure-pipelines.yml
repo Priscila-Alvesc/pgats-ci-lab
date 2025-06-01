@@ -1,28 +1,21 @@
-
-# Node.js
-# Build a general Node.js project with npm.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
-name: Build Node.js
+name: Execução manual azure
 
 on:
-  workflow_dispatch: # Permite execução manual
+  workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout código
-        uses: actions/checkout@v3
-
-      - name: Instalar Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20.x'
-
-      - name: Instalar dependências e construir
-        run: |
-          npm install
-          npm run build
+    e2e-tests:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: actions/setup-node@v4
+          with:
+            node-version: 22.x
+        - name: Instalando Yarn
+          run: npm install -g yarn
+        - name: Instalando as dependências
+          run: yarn
+        - name: Instalando Playwright
+          run: yarn playwright install
+        - name: Executando testes E2E
+          run: yarn run e2e
