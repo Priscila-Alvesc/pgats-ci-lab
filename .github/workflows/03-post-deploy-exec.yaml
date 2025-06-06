@@ -11,9 +11,8 @@
     workflow_run:
       workflows: ['Execução manual']
       types: 
-        -  completed
+        - completed
 
-  #Socorro
   # regras de disparos (gatilhos/ triggers)
   # gatilho de exec manual = workflow_dispatch
 
