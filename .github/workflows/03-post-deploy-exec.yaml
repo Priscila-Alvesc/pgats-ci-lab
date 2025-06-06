@@ -16,7 +16,6 @@
   # regras de disparos (gatilhos/ triggers)
   # gatilho de exec manual = workflow_dispatch
 
-
   # trabalhos/tarefas dentro do pipleine = jobs
   jobs:
     e2e-tests:
