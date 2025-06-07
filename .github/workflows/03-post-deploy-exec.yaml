@@ -56,7 +56,8 @@
           if: ${{ !cancelled() }}
           with: 
             name: report
-            path: ./playwright-report
+            #path: Test Report
+            path: ./test-results/results.xml
             reporter: java-junit
 
 
