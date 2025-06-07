@@ -1,42 +1,44 @@
-[![Code coverage badge](https://img.shields.io/badge/coverage-100%25-brightgreen)](https://stryker-mutator.io/robo-coasters-example/reports/coverage/lcov-report/index.html)
-[![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fstryker-mutator%2Frobo-coasters-example%2Fmaster)](https://dashboard.stryker-mutator.io/reports/github.com/stryker-mutator/robo-coasters-example/master)
+# Workflows de CI/CD
 
-# PGATS - CI - Lab
+Este documento descreve os workflows de automação utilizados no projeto.
 
-## Pré-requisitos
+## Workflow `n1/n2/n3`
 
-1. Instale o [git](https://git-scm.com)
-2. Instale o [nodejs](https://nodejs.org/)
-3. Instale o Yarn - `npm install -g yarn`
-4. Faça um _Fork_ do projeto
-5. Clone o repositório para sua máquina (seu fork)
-6. Instale as dependências
-   ```shell
-   cd pgats-ci-lab
-   yarn
-   ```
-7. Execute os testes de unidade - isso vai gerar um relatório
-   ```shell
-   yarn run test
-   ```
-8. Abra o relatório de cobertura de código em `reports/coverage/lcov-report`
-9. Execute os testes de mutação com o Stryker
-   ```shell
-   yarn run test:mutation
-   ```
-10. Abra o relatório de mutação em `reports/mutation`
-11. Instale os navegadores do Playwright
-    ```shell
-    yarn playwright install
-    ```
-12. Execute os testes end-to-end com o Playwright
-    ```shell
-    yarn run e2e
-    ```
-13. Execute a aplicação com `yarn start`
-14. Acesse a aplicação publicada [neste link](https://pgats-ci-example.netlify.app)
+### Job: `e2e-tests`
+- **Passos**:
+  1. Instalar dependências (`installer deeps`)
+  2. Executar scripts de teste (`executor script de testes`)
+  3. Publicar resultados (`publicar resultados`)
 
 ---
 
-💜⚡️
-# pgats-ci-lab
+## Workflow `n4`
+
+### Bloco 1
+#### Job: `inspector`
+- **Passos**:
+  1. Instalar dependências
+  2. Executar script de Lint
+
+#### Job: `unidade`  
+- **Passos**:
+  1. Instalar dependências
+  2. Executar testes unitários
+
+### Bloco 2
+#### Job: `e2e-tests`
+- **Passos**:
+  1. Instalar dependências
+  2. Subir aplicação localmente
+  3. Instalar browsers/navegadores
+  4. Executar testes E2E
+  5. Publicar resultados (formato ZIP ou online)
+
+### Bloco 3
+#### Job: `deploy`
+- **Passos**:
+  1. Instalar dependências
+  2. Gerar artefatos da aplicação
+  3. Publicar em ambiente destino
+
+> **Nota**: Substitua termos como "deeps" por "dependencies" caso necessário para padronização.
