@@ -74,25 +74,3 @@ jobs:
     steps:
       - name: Deploy simulation
         run: echo 'Deploy application'
-
-
-
-
-
-
- #- workflow - n4
-  #- jobs - inspecao (bloco 1)
-    #- steps - instalar dependencias
-    #- steps -  executar script de lint
-  #- jobs -  unidade (bloco 1)
-    #- steps - instalar dependencias
-    #- steps - executar script de testes de unidade
-  #- jobs  - e2e-testes (bloco 2)
-    #- steps - Subir aplicação localmente
-    #- steps - instalar browsers/navegadores
-    #- steps - executar script de testes de e2e   
-    #- steps - publicar resultados de testes (zip/online)
-  #- jobs  - deploy (bloco 3)
-    #- steps - instalar dependencias
-    #- steps - gerar artefatos de aplicacao
-    #- steps - publicar a aplicacao em algum ambiente
