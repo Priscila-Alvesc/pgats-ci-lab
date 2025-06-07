@@ -57,5 +57,7 @@
           with: 
             name: report
             path: ./playwright-report
+            reporter: java-junit
+
 
 
