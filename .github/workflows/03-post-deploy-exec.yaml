@@ -13,15 +13,19 @@
       types: 
         - completed
 
-  # regras de disparos (gatilhos/ triggers)
-  # gatilho de exec manual = workflow_dispatch
-
   # trabalhos/tarefas dentro do pipleine = jobs
   jobs:
     e2e-tests:
 
     # maquina que o job vai executar
       runs-on: ubuntu-latest
+
+      #condicional -if - 
+      # `$ {{expressao}}
+
+      #ondicional para verofocar se o pipe antecessor executou com sucesso
+      if: ${{github.event.workflow_run.conclusion == 'success' }}
+
 
       # passos do job
       steps:
