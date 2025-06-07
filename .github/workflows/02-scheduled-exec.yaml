@@ -1,55 +1,52 @@
-  # CI de Nível 02 - Disparo agendad0 por um schedule
+# CI de Nível 02 - Disparo agendad0 por um schedule
 
-  #nome do nosso 'pipeline'
-  name: 'Execução Agendada'
+#nome do nosso 'pipeline'
+name: 'Execução Agendada'
 
+# regras de disparos (gatilhos/ triggers)
+# # gatilho de exec agendada = Schedule
 
-  # regras de disparos (gatilhos/ triggers)
-# # gatilho de exec agendada = Schedule 
-  
-  on:
-    schedule:
-       #rodar um regresso toda segunda-feira pela manhã
-        # a - minuto
-        # b - hora
-        # c- dia do mês
-        # d - mês
-        # e - dia da semana
+on:
+  schedule:
+    #rodar um regresso toda segunda-feira pela manhã
+    # a - minuto
+    # b - hora
+    # c- dia do mês
+    # d - mês
+    # e - dia da semana
 
-        #cron
-        # a b c d e
-      - cron: '0 6 * * 6'
+    #cron
+    # a b c d e
+    - cron: '0 6 * * 6'
 
-
-  # trabalhos/tarefas dentro do pipleine = jobs
-  jobs:
-    e2e-tests:
-
+# trabalhos/tarefas dentro do pipleine = jobs
+jobs:
+  e2e-tests:
     # maquina que o job vai executar
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-      # passos do job
-      steps:
-        #clone do projeto 
-        - uses: actions/checkout@v4
+    # passos do job
+    steps:
+      #clone do projeto
+      - uses: actions/checkout@v4
 
-        #instalação do node
-        - uses: actions/setup-node@V4
-          with:
-            node-version: 22.x
+      #instalação do node
+      - uses: actions/setup-node@V4
+        with:
+          node-version: 22.x
 
-            # instalação do Yarn
-        - name: instalando Yarn
-          run: npm install -g yarn        
+          # instalação do Yarn
+      - name: instalando Yarn
+        run: npm install -g yarn
 
-        #instalação das dependências
-        - name: Instalando as dependências
-          run: yarn
+      #instalação das dependências
+      - name: Instalando as dependências
+        run: yarn
 
-        #Instalação do playwringht
-        - name: Instalando playwringht
-          run: yarn playwright install
+      #Instalação do playwringht
+      - name: Instalando playwringht
+        run: yarn playwright install
 
-        #Executar os testes e2e
-        - name: Executando testes E2E
-          run: yarn run e2e
+      #Executar os testes e2e
+      - name: Executando testes E2E
+        run: yarn run e2e

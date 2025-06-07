@@ -6,7 +6,7 @@ pool:
 
 jobs:
   - job: e2e_tests
-    displayName: "Testes E2E"
+    displayName: 'Testes E2E'
     pool:
       vmImage: ubuntu-latest
     steps:
@@ -15,10 +15,10 @@ jobs:
         inputs:
           version: '22.x'
       - script: npm install -g yarn
-        displayName: "Instalando Yarn"
+        displayName: 'Instalando Yarn'
       - script: yarn
-        displayName: "Instalando dependências"
+        displayName: 'Instalando dependências'
       - script: yarn playwright install
-        displayName: "Instalando Playwright"
+        displayName: 'Instalando Playwright'
       - script: yarn run e2e
-        displayName: "Executando testes E2E"
+        displayName: 'Executando testes E2E'

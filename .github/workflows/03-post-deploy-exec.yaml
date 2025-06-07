@@ -1,59 +1,57 @@
-  # CI de Nível 03 - Disparo após a conclusão de um pipeline
+# CI de Nível 03 - Disparo após a conclusão de um pipeline
 
-  #nome do nosso 'pipeline'
-  name: 'Execução por Deploy'
+#nome do nosso 'pipeline'
+name: 'Execução por Deploy'
 
+# regras de disparos (gatilhos/ triggers)
+# gatilho de exec a partir de outro pipe = workflow_run
 
-  # regras de disparos (gatilhos/ triggers)
-  # gatilho de exec a partir de outro pipe = workflow_run
+on:
+  workflow_run:
+    workflows: ['Execução manual']
+    types:
+      - completed
 
-  on:
-    workflow_run:
-      workflows: ['Execução manual']
-      types: 
-        - completed
-
-  # trabalhos/tarefas dentro do pipleine = jobs
-  jobs:
-    e2e-tests:
-
+# trabalhos/tarefas dentro do pipleine = jobs
+jobs:
+  e2e-tests:
     # maquina que o job vai executar
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-      #condicional -if - 
-      # `$ {{expressao}}
+    #condicional -if -
+    # `$ {{expressao}}
 
-      #ondicional para verofocar se o pipe antecessor executou com sucesso
-      if: ${{github.event.workflow_run.conclusion == 'success' }}
+    #ondicional para verofocar se o pipe antecessor executou com sucesso
+    if: ${{github.event.workflow_run.conclusion == 'success' }}
 
-      # passos do job
-      steps:
-        #clone do projeto 
-        - uses: actions/checkout@v4
+    # passos do job
+    steps:
+      #clone do projeto
+      - uses: actions/checkout@v4
 
-        #instalação do node
-        - uses: actions/setup-node@V4
-          with:
-            node-version: 22.x
+      #instalação do node
+      - uses: actions/setup-node@V4
+        with:
+          node-version: 22.x
 
-            # instalação do Yarn
-        - name: instalando Yarn
-          run: npm install -g yarn        
+          # instalação do Yarn
+      - name: instalando Yarn
+        run: npm install -g yarn
 
-        #instalação das dependências
-        - name: Instalando as dependências
-          run: yarn
+      #instalação das dependências
+      - name: Instalando as dependências
+        run: yarn
 
-        #Instalação do playwringht
-        - name: Instalando playwringht
-          run: yarn playwright install
+      #Instalação do playwringht
+      - name: Instalando playwringht
+        run: yarn playwright install
 
-        #Executar os testes e2e
-        - name: Executando testes E2E
-          run: yarn run e2e
+      #Executar os testes e2e
+      - name: Executando testes E2E
+        run: yarn run e2e
 
-        - uses: actions/upload-artifact@V4
-          if: ${{ !cancelled() }}
-          with: 
-            name: report
-            path: ./playwright-report
+      - uses: actions/upload-artifact@V4
+        if: ${{ !cancelled() }}
+        with:
+          name: report
+          path: ./playwright-report
